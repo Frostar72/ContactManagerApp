@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useLayoutEffect } from 'react';
 import {
   View,
   Text,
@@ -28,6 +28,19 @@ const ContactDetailsScreen = ({ route, navigation }) => {
     () => contacts.find(c => c.id === contactId),
     [contacts, contactId],
   );
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('AddContact', { contact })}
+          style={{ marginRight: Spacing.md }}
+        >
+          <Icon name="edit" size={24} color={Colors.primary} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, contact]);
 
   if (loading) {
     return <LoadingSpinner />;

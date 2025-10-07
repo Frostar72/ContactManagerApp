@@ -28,7 +28,9 @@ function App() {
             <Stack.Screen 
               name="AddContact" 
               component={AddContactScreen} 
-              options={{ title: 'Add Contact' }} 
+              options={({ route }) => ({ 
+                title: route.params?.contact ? 'Edit Contact' : 'Add Contact' 
+              })} 
             />
             <Stack.Screen 
               name="ContactDetails" 
